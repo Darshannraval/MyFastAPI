@@ -5,4 +5,4 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Today is sunday"}
+    return {"message": "Tomorrow is Monday"}
