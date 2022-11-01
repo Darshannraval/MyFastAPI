@@ -20,14 +20,14 @@ pipeline {
                 withCredentials([string(credentialsId: 'docker_password', variable: 'dockerhub_password')]) {
                   sh "sudo docker login -u darshannraval -p ${dockerhub_password}"
                   sh "sudo docker push darshannraval/mytest:${DOCKER_TAG}"
-                  sh "sudo sh /home/darsan/changetag.sh ${DOCKER_TAG}"
+                  sh "sudo sh /home/darsan/MyFastAPI/changetag.sh ${DOCKER_TAG}"
                 }
             }
         }    
         stage("deploy to monikube"){
             steps{
-                sh "kubectl apply -f /home/darsan/mytest.yaml"
-                sh "sudo sh /home/darsan/redo.sh"
+                sh "kubectl apply -f /home/darsan/MyFastAPI/mytest.yaml"
+                sh "sudo sh /home/darsan/MyFastAPI/redo.sh"
             }    
         }    
     }
