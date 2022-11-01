@@ -5,12 +5,12 @@ pipeline {
        KUBECONFIG="/home/darsan/.kube/config"
     }
     stages{
-        stage("checkout to git"){
+        stage("Checkout to git"){
             steps{
             git branch: 'main', url: 'https://github.com/Darshannraval/MyFastAPI'
             }
         }
-        stage("Build Docker Image and Push to Docker Hub"){
+        stage("Build Docker Image"){
             steps{
                 sh "sudo docker build . -t darshannraval/mytest:${DOCKER_TAG}"
             }
@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }    
-        stage("deploy to monikube"){
+        stage("Deploy to Minikube"){
             steps{
                 sh "kubectl apply -f /home/darsan/MyFastAPI/mytest.yaml"
                 sh "sudo sh /home/darsan/MyFastAPI/redo.sh"
